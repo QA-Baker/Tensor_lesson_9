@@ -33,4 +33,32 @@
 
 import datetime
 
+
 # Здесь пишем код
+def func_log(file_log='log.txt'):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            # Получаем текущую дату и время
+            current_time = datetime.datetime.now().strftime('%d.%m %H:%M:%S')
+            # Формируем строку для записи в файл
+            log_message = f'{func.__name__} вызвана {current_time}\n'
+            # Записываем сообщение в файл
+            with open(file_log, 'a', encoding='utf-8') as f:
+                f.write(log_message)
+            # Вызываем исходную функцию
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+# Использование декоратора
+@func_log()
+def func1():
+    print("Функция 1 выполнена")
+
+@func_log(file_log='func2.txt')
+def func2():
+    print("Функция 2 выполнена")
+
+func1()
+func2()
+func1()

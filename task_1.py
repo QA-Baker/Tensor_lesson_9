@@ -4,7 +4,20 @@
 
 
 # Здесь пишем код
+import re
 
+# Открытие исходного файла для чтения
+with open("test_file/task1_data.txt", 'r', encoding='utf-8') as infile:
+    # Чтение всего текста из файла
+    text = infile.read()
+
+    # Использование регулярного выражения для удаления всех цифр
+    cleaned_text = re.sub(r'\d', '', text)
+
+# Открытие файла для записи очищенного текста
+with open("test_file/task1_answer.txt", 'w', encoding='utf-8') as outfile:
+    # Запись очищенного текста в новый файл
+    outfile.write(cleaned_text)
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
